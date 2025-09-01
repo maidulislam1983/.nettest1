@@ -7,4 +7,18 @@
 	  <AspNetCoreHostingModel>OutOfProcess</AspNetCoreHostingModel>  
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="Properties\PublishProfiles\saidul1983-001-site1 - Web Deploy.pubxml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Properties\PublishProfiles\saidul1983-001-site1 - Web Deploy.pubxml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Properties\PublishProfiles\saidul1983-001-site1 - Web Deploy.pubxml.user" />
+  </ItemGroup>
+
 </Project>
