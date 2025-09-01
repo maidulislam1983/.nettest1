@@ -54,23 +54,23 @@ stages:
         arguments: '--configuration $(buildConfiguration) --no-build --collect:"XPlat Code Coverage"'
       continueOnError: true
 
-#     # Publish the application
-#     - task: DotNetCoreCLI@2
-#       displayName: 'Publish application'
-#       inputs:
-#         command: 'publish'
-#         projects: '$(projectPath)'
-#         arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish --no-build'
-#         publishWebProjects: true
-#         zipAfterPublish: true
+    # Publish the application
+    - task: DotNetCoreCLI@2
+      displayName: 'Publish application'
+      inputs:
+        command: 'publish'
+        projects: '$(projectPath)'
+        arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)/publish --no-build'
+        publishWebProjects: true
+        zipAfterPublish: true
 
-#     # Publish build artifacts
-#     - task: PublishBuildArtifacts@1
-#       displayName: 'Publish build artifacts'
-#       inputs:
-#         PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-#         ArtifactName: 'drop'
-#         publishLocation: 'Container'
+    # Publish build artifacts
+    - task: PublishBuildArtifacts@1
+      displayName: 'Publish build artifacts'
+      inputs:
+        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+        ArtifactName: 'drop'
+        publishLocation: 'Container'
 
 # - stage: Deploy
 #   displayName: 'Deploy to Production'
