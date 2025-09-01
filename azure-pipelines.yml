@@ -115,4 +115,4 @@ stages:
             inputs:
               command: 'custom'
               custom: 'publish'
-              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)"'
+              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="mislam1983" /p:UserName="saidul1983-001"'
