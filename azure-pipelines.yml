@@ -104,7 +104,7 @@ stages:
             inputs:
               command: 'custom'
               custom: 'publish'
-              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)" /p:Configuration=$(buildConfiguration)'
+              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="mislam1983" /p:UserName="saidul1983-001" /p:Configuration=$(buildConfiguration)'
 
           # Alternative FTP deployment (uncomment if Web Deploy fails)
           # - task: DotNetCoreCLI@2
