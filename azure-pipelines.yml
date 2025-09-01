@@ -90,13 +90,13 @@ stages:
             artifact: drop
             displayName: 'Download build artifacts'
 
-          # Install .NET SDK for deployment
-          - task: UseDotNet@2
-            displayName: 'Install .NET SDK for deployment'
-            inputs:
-              packageType: 'sdk'
-              version: '$(dotnetVersion)'
-              installationPath: $(Agent.ToolsDirectory)/dotnet
+          # # Install .NET SDK for deployment
+          # - task: UseDotNet@2
+          #   displayName: 'Install .NET SDK for deployment'
+          #   inputs:
+          #     packageType: 'sdk'
+          #     version: '$(dotnetVersion)'
+          #     installationPath: $(Agent.ToolsDirectory)/dotnet
 
           # # Deploy using Web Deploy (MSDeploy)
           # - task: IISWebAppDeploymentOnMachineGroup@0
