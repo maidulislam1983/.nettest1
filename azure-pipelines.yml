@@ -72,42 +72,42 @@ stages:
         ArtifactName: 'drop'
         publishLocation: 'Container'
 
-# - stage: Deploy
-#   displayName: 'Deploy to Production'
-#   dependsOn: Build
-#   condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
-#   jobs:
-#   - deployment: DeployWeb
-#     displayName: 'Deploy to Web Server'
-#     environment: 'Production'
-#     strategy:
-#       runOnce:
-#         deploy:
-#           steps:
+- stage: Deploy
+  displayName: 'Deploy to Production'
+  dependsOn: Build
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  jobs:
+  - deployment: DeployWeb
+    displayName: 'Deploy to Web Server'
+    environment: 'Production'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
           
-#           # Download build artifacts
-#           - download: current
-#             artifact: drop
-#             displayName: 'Download build artifacts'
+          # Download build artifacts
+          - download: current
+            artifact: drop
+            displayName: 'Download build artifacts'
 
-#           # Install .NET SDK for deployment
-#           - task: UseDotNet@2
-#             displayName: 'Install .NET SDK for deployment'
-#             inputs:
-#               packageType: 'sdk'
-#               version: '$(dotnetVersion)'
-#               installationPath: $(Agent.ToolsDirectory)/dotnet
+          # Install .NET SDK for deployment
+          - task: UseDotNet@2
+            displayName: 'Install .NET SDK for deployment'
+            inputs:
+              packageType: 'sdk'
+              version: '$(dotnetVersion)'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
 
-#           # Deploy using Web Deploy (MSDeploy)
-#           - task: IISWebAppDeploymentOnMachineGroup@0
-#             displayName: 'Deploy using Web Deploy'
-#             inputs:
-#               WebSiteName: 'saidul1983-001-site1'
-#               Package: '$(Pipeline.Workspace)/drop/publish/*.zip'
-#               RemoveAdditionalFilesFlag: true
-#               TakeAppOfflineFlag: true
-#               XmlTransformation: true
-#               XmlVariableSubstitution: true
+          # Deploy using Web Deploy (MSDeploy)
+          - task: IISWebAppDeploymentOnMachineGroup@0
+            displayName: 'Deploy using Web Deploy'
+            inputs:
+              WebSiteName: 'saidul1983-001-site1'
+              Package: '$(Pipeline.Workspace)/drop/publish/*.zip'
+              RemoveAdditionalFilesFlag: true
+              TakeAppOfflineFlag: true
+              XmlTransformation: true
+              XmlVariableSubstitution: true
 
 #           # Alternative: Deploy using publish profile (uncomment if Web Deploy task doesn't work)
 #           # - task: DotNetCoreCLI@2
