@@ -1,0 +1,62 @@
+# Simple ASP.NET Core Pipeline using Publish Profiles
+# This pipeline directly uses your existing publish profiles for deployment
+
+trigger:
+- main
+
+pool:
+  vmImage: 'windows-latest'
+
+variables:
+  solution: '**/*.sln'
+  buildConfiguration: 'Release'
+  projectPath: 'WebApplication1/WebApplication1.csproj'
+  publishProfile: 'saidul1983-001-site1 - Web Deploy'
+
+steps:
+# Install .NET SDK
+- task: UseDotNet@2
+  displayName: 'Install .NET 8 SDK'
+  inputs:
+    packageType: 'sdk'
+    version: '8.x'
+
+# Restore NuGet packages
+- task: DotNetCoreCLI@2
+  displayName: 'Restore packages'
+  inputs:
+    command: 'restore'
+    projects: '$(solution)'
+
+# Build the solution
+- task: DotNetCoreCLI@2
+  displayName: 'Build solution'
+  inputs:
+    command: 'build'
+    projects: '$(solution)'
+    arguments: '--configuration $(buildConfiguration) --no-restore'
+
+# Run tests (if any)
+- task: DotNetCoreCLI@2
+  displayName: 'Run tests'
+  inputs:
+    command: 'test'
+    projects: '**/*Test*.csproj'
+    arguments: '--configuration $(buildConfiguration) --no-build --logger trx --results-directory $(Agent.TempDirectory)'
+  continueOnError: true
+
+# Publish using the publish profile
+- task: DotNetCoreCLI@2
+  displayName: 'Deploy using publish profile'
+  inputs:
+    command: 'custom'
+    custom: 'publish'
+    arguments: '$(projectPath) /p:PublishProfile="$(publishProfile)" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)" /p:Configuration=$(buildConfiguration)'
+
+# Alternative FTP deployment (uncomment if you prefer FTP over Web Deploy)
+# - task: DotNetCoreCLI@2
+#   displayName: 'Deploy using FTP publish profile'
+#   inputs:
+#     command: 'custom'
+#     custom: 'publish'
+#     arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - FTP" /p:Password="$(FtpPassword)" /p:UserName="$(FtpUsername)" /p:Configuration=$(buildConfiguration)'
