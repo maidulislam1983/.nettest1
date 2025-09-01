@@ -90,32 +90,26 @@ stages:
             artifact: drop
             displayName: 'Download build artifacts'
 
-          # # Install .NET SDK for deployment
-          # - task: UseDotNet@2
-          #   displayName: 'Install .NET SDK for deployment'
-          #   inputs:
-          #     packageType: 'sdk'
-          #     version: '$(dotnetVersion)'
-          #     installationPath: $(Agent.ToolsDirectory)/dotnet
+          # Install .NET SDK for deployment
+          - task: UseDotNet@2
+            displayName: 'Install .NET SDK for deployment'
+            inputs:
+              packageType: 'sdk'
+              version: '$(dotnetVersion)'
+              installationPath: $(Agent.ToolsDirectory)/dotnet
 
           # Deploy using publish profile (more reliable method)
           - task: DotNetCoreCLI@2
             displayName: 'Deploy using Web Deploy publish profile'
-          #   inputs:
-              command: 'custom'
-              custom: 'publish'
-              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)" /p:Configuration=$(buildConfiguration)'
-              WebSiteName: 'saidul1983-001-site1'
-              Package: '$(Pipeline.Workspace)/drop/publish/*.zip'
-              RemoveAdditionalFilesFlag: true
-              TakeAppOfflineFlag: true
-              XmlTransformation: true
-              XmlVariableSubstitution: true
-
-          # Alternative FTP deployment (uncomment if Web Deploy fails)
-          - task: DotNetCoreCLI@2
-          #   displayName: 'Deploy using FTP publish profile'
             inputs:
               command: 'custom'
               custom: 'publish'
+              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)" /p:Configuration=$(buildConfiguration)'
+
+          # Alternative FTP deployment (uncomment if Web Deploy fails)
+          # - task: DotNetCoreCLI@2
+          #   displayName: 'Deploy using FTP publish profile'
+          #   inputs:
+          #     command: 'custom'
+          #     custom: 'publish'
           #     arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - FTP" /p:Password="$(FtpPassword)" /p:UserName="$(FtpUsername)" /p:Configuration=$(buildConfiguration)'
