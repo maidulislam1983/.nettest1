@@ -98,21 +98,21 @@ stages:
               version: '$(dotnetVersion)'
               installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          # Deploy using Web Deploy (MSDeploy)
-          - task: IISWebAppDeploymentOnMachineGroup@0
-            displayName: 'Deploy using Web Deploy'
-            inputs:
-              WebSiteName: 'saidul1983-001-site1'
-              Package: '$(Pipeline.Workspace)/drop/publish/*.zip'
-              RemoveAdditionalFilesFlag: true
-              TakeAppOfflineFlag: true
-              XmlTransformation: true
-              XmlVariableSubstitution: true
+          # # Deploy using Web Deploy (MSDeploy)
+          # - task: IISWebAppDeploymentOnMachineGroup@0
+          #   displayName: 'Deploy using Web Deploy'
+          #   inputs:
+          #     WebSiteName: 'saidul1983-001-site1'
+          #     Package: '$(Pipeline.Workspace)/drop/publish/*.zip'
+          #     RemoveAdditionalFilesFlag: true
+          #     TakeAppOfflineFlag: true
+          #     XmlTransformation: true
+          #     XmlVariableSubstitution: true
 
-#           # Alternative: Deploy using publish profile (uncomment if Web Deploy task doesn't work)
-#           # - task: DotNetCoreCLI@2
-#           #   displayName: 'Deploy using publish profile'
-#           #   inputs:
-#           #     command: 'custom'
-#           #     custom: 'publish'
-#           #     arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)"'
+          #Alternative: Deploy using publish profile (uncomment if Web Deploy task doesn't work)
+          - task: DotNetCoreCLI@2
+            displayName: 'Deploy using publish profile'
+            inputs:
+              command: 'custom'
+              custom: 'publish'
+              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)"'
