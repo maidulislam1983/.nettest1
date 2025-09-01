@@ -98,13 +98,11 @@ stages:
           #     version: '$(dotnetVersion)'
           #     installationPath: $(Agent.ToolsDirectory)/dotnet
 
-          # Deploy using publish profile (more reliable method)
-          - task: DotNetCoreCLI@2
-            displayName: 'Deploy using Web Deploy publish profile'
+<<<<<<< Updated upstream
+          # Deploy using Web Deploy (MSDeploy)
+          - task: IISWebAppDeploymentOnMachineGroup@0
+            displayName: 'Deploy using Web Deploy'
           #   inputs:
-              command: 'custom'
-              custom: 'publish'
-              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)" /p:Configuration=$(buildConfiguration)'
               WebSiteName: 'saidul1983-001-site1'
               Package: '$(Pipeline.Workspace)/drop/publish/*.zip'
               RemoveAdditionalFilesFlag: true
@@ -112,10 +110,27 @@ stages:
               XmlTransformation: true
               XmlVariableSubstitution: true
 
-          # Alternative FTP deployment (uncomment if Web Deploy fails)
+          # Alternative: Deploy using publish profile (uncomment if Web Deploy task doesn't work)
           - task: DotNetCoreCLI@2
-          #   displayName: 'Deploy using FTP publish profile'
+          #   displayName: 'Deploy using publish profile'
             inputs:
               command: 'custom'
               custom: 'publish'
+          #     arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)"'
+=======
+          # Deploy using publish profile (more reliable method)
+          - task: DotNetCoreCLI@2
+            displayName: 'Deploy using Web Deploy publish profile'
+            inputs:
+              command: 'custom'
+              custom: 'publish'
+              arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - Web Deploy" /p:Password="$(DeployPassword)" /p:UserName="$(DeployUsername)" /p:Configuration=$(buildConfiguration)'
+
+          # Alternative FTP deployment (uncomment if Web Deploy fails)
+          # - task: DotNetCoreCLI@2
+          #   displayName: 'Deploy using FTP publish profile'
+          #   inputs:
+          #     command: 'custom'
+          #     custom: 'publish'
           #     arguments: '$(projectPath) /p:PublishProfile="saidul1983-001-site1 - FTP" /p:Password="$(FtpPassword)" /p:UserName="$(FtpUsername)" /p:Configuration=$(buildConfiguration)'
+>>>>>>> Stashed changes
