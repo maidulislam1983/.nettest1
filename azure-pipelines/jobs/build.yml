@@ -1,5 +1,5 @@
 jobs:
-  - job: Build
+  - job: Build_PublishBuildArtifacts
     pool:
       vmImage: 'windows-latest'
     steps:
