@@ -1,0 +1,16 @@
+steps:
+  - task: VSTest@2
+    inputs:
+      testSelector: 'testAssemblies'
+      testAssemblyVer2: |
+        **\*test*.dll
+        !**\*TestAdapter.dll
+        !**\obj\**
+      searchFolder: '$(Build.SourcesDirectory)'
+      diagnosticsEnabled: true
+    displayName: "Run unit tests"
+
+  - task: PublishTestResults@2
+    inputs:
+      testResultsFiles: '**/TestResults/*.trx'
+      testRunTitle: "Automated Unit Tests"

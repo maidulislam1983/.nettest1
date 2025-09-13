@@ -1,0 +1,6 @@
+variables:
+  buildConfiguration: Debug
+  buildPlatform: Any CPU
+  azureServiceConnection: 'my-dev-connection'
+  webAppName: 'my-dotnet-webapp-dev'
+  iisSiteName: 'MyIISDevSite'

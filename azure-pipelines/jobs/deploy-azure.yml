@@ -1,0 +1,10 @@
+jobs:
+  - deployment: DeployAzure
+    environment: production
+    pool:
+      vmImage: 'windows-latest'
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+            - template: ../steps/deploy-azure.yml

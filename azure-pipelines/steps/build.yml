@@ -1,0 +1,14 @@
+steps:
+  - task: VSBuild@1
+    inputs:
+      solution: '**/*.sln'
+      msbuildArgs: '-p:Configuration=$(buildConfiguration)'
+      platform: '$(buildPlatform)'
+      configuration: '$(buildConfiguration)'
+    displayName: "Build solution"
+
+  - task: PublishBuildArtifacts@1
+    inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: drop
+    displayName: "Publish build artifacts"

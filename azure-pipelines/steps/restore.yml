@@ -1,0 +1,11 @@
+steps:
+  - task: UseDotNet@2
+    inputs:
+      packageType: 'sdk'
+      version: '8.x' # adjust for your project
+    displayName: "Install .NET SDK"
+
+  - task: NuGetCommand@2
+    inputs:
+      restoreSolution: '**/*.sln'
+    displayName: "Restore NuGet packages"

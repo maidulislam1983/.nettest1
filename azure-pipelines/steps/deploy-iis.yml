@@ -1,0 +1,13 @@
+steps:
+  - download: current
+    artifact: drop
+
+  - task: IISWebAppDeploymentOnMachineGroup@0
+    inputs:
+      WebSiteName: $(iisSiteName)
+      Package: '$(Pipeline.Workspace)/drop/**/*.zip'
+      TakeAppOfflineFlag: true
+      RemoveAdditionalFilesFlag: true
+      XmlVariableSubstitution: true
+      SetParametersFile: '**/*.SetParameters.xml'
+    displayName: "Deploy to IIS Server"

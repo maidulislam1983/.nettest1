@@ -1,0 +1,6 @@
+variables:
+  buildConfiguration: Release
+  buildPlatform: Any CPU
+  azureServiceConnection: 'my-prod-connection'
+  webAppName: 'my-dotnet-webapp-prod'
+  iisSiteName: 'MyIISProdSite'

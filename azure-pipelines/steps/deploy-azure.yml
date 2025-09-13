@@ -1,0 +1,10 @@
+steps:
+  - download: current
+    artifact: drop
+
+  - task: AzureWebApp@1
+    inputs:
+      azureSubscription: $(azureServiceConnection)
+      appName: $(webAppName)
+      package: '$(Pipeline.Workspace)/drop/**/*.zip'
+    displayName: "Deploy to Azure Web App"

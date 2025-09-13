@@ -1,0 +1,18 @@
+# azure-pipelines/dev.yaml
+trigger:
+  branches:
+    include:
+      - dev
+
+variables:
+- template: vars/dev.yml
+
+stages:
+  - stage: Build
+    jobs:
+      - template: jobs/build.yml
+
+  - stage: Test
+    dependsOn: Build
+    jobs:
+      - template: jobs/test.yml

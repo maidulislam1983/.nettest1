@@ -1,0 +1,25 @@
+# azure-pipelines/production.yaml
+trigger:
+  branches:
+    include:
+      - main
+
+variables:
+- template: vars/prod.yml
+
+stages:
+  - stage: Build
+    jobs:
+      - template: jobs/build.yml
+
+  - stage: Test
+    dependsOn: Build
+    jobs:
+      - template: jobs/test.yml
+
+  - stage: Deploy
+    dependsOn: Test
+    jobs:
+      # Uncomment whichever deployment you need
+      - template: jobs/deploy-azure.yml
+      # - template: jobs/deploy-iis.yml

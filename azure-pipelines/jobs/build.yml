@@ -1,0 +1,7 @@
+jobs:
+  - job: Build
+    pool:
+      vmImage: 'windows-latest'
+    steps:
+      - template: ../steps/restore.yml
+      - template: ../steps/build.yml
