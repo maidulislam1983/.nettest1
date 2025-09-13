@@ -9,7 +9,7 @@ variables:
 - template: vars/dev.yml
 
 stages:
-  - stage: Build + PublishBuildArtifacts
+  - stage: Build_PublishBuildArtifacts
     jobs:
       - template: jobs/build.yml      
 
