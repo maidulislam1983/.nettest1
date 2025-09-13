@@ -14,6 +14,6 @@ stages:
       - template: jobs/build.yml      
 
   - stage: Test
-    dependsOn: Build
+    dependsOn: BuildWithPublishBuildArtifacts
     jobs:
       - template: jobs/test.yml
