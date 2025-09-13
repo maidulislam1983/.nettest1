@@ -1,6 +1,12 @@
 variables:
   buildConfiguration: Debug
   buildPlatform: Any CPU
-  azureServiceConnection: 'my-dev-connection'
-  webAppName: 'my-dotnet-webapp-dev'
-  iisSiteName: 'MyIISDevSite'
+  dotnetVersion: ''
+  solution: '**/*.sln'
+  projectPath: 'WebApplication1/WebApplication1.csproj'
+  RestoreBuildProjects: '**/*.csproj'
+
+  azureServiceConnection: ''
+  webAppName: ''
+  iisSiteName: ''  
+  //buildConfiguration: 'Release'  
