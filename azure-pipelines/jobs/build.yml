@@ -5,3 +5,4 @@ jobs:
     steps:
       - template: ../steps/restore.yml
       - template: ../steps/build.yml
+      - template: ../steps/publish-build-artifacts.yml
